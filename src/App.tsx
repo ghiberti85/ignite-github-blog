@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom"
-import { Router } from './router'
+import { Router } from './Router'
 import { GlobalStyle } from "./styles/global"
 
 export default function App() {
