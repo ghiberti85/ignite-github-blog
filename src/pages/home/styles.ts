@@ -1,3 +1,5 @@
+import { styled } from "styled-components"
+
 export const HomeContainer = styled.div`
     max-width: 864px;
     width: 100%;
@@ -7,7 +9,7 @@ export const HomeContainer = styled.div`
 
     header {
         display: flex;
-        padding: 2rem 2.5rem,
+        padding: 2rem 2.5rem;
         border-radius: 10px;
         background: #0b1b2b;
         margin-top: -80px;
@@ -23,7 +25,7 @@ export const HomeContainer = styled.div`
     }
 `
 
-export conts BioContainer = styled.div`
+export const BioContainer = styled.div`
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -116,4 +118,16 @@ export const SearchForm = styled.form`
             color: #3a536b;
         }
     }
+`
+
+export const PostsContainer = styled.div`
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+`
+
+export const LoadingContent = styled.div`
+    text-align: center;
+    color: white;
 `

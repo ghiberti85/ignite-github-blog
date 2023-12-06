@@ -1,4 +1,5 @@
 import { Buildings, GithubLogo, LinkSimple, Users } from "phosphor-react";
+import { BioContainer, HomeContainer, InfoContainer, PostsContainer, SearchForm } from "./styles";
 
 export function Home() {
     return (
@@ -33,9 +34,7 @@ export function Home() {
                 />
             </SearchForm>
 
-            <PostContainer>
-                <Post />
-            </PostContainer>
+            <PostsContainer></PostsContainer>
         </HomeContainer>
     )
 }
