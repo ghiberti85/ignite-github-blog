@@ -1,46 +1,85 @@
 import { Buildings, GithubLogo, LinkSimple, Users } from "phosphor-react";
-import { BioContainer, HomeContainer, InfoContainer, PostsContainer, SearchForm } from "./styles";
+import { BioContainer, HomeContainer, InfoContainer, LoadingContent, PostsContainer, SearchForm } from "./styles";
 import { Post } from "./PostComponent";
+import { PostsContext } from "../../context/postsContext";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+
+interface searchProps {
+    searchValue: string
+}
+
+interface PostProps {
+    title: string
+    body: string
+    number: string
+    create_at: string
+    id: string
+}
 
 export function Home() {
-    return (
-        <HomeContainer>
-            <header>
-                <img src="https://github.com/ghiberti85.png" alt="Profile Picture" />
-                <BioContainer>
-                    <h1>Fernando Ghiberti</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem odio alias provident deserunt pariatur! Nobis mollitia ipsa commodi sunt aut amet ut nihil expedita, consectetur adipisci iusto, deleniti, corrupti incidunt?</p>
-                    <a href="https://github.com/ghiberti85" target="_blank" rel="noreferrer noopener">
-                        <LinkSimple size={16} />
-                        GITHUB
-                    </a>
 
-                    <InfoContainer>
-                        <span><GithubLogo size={18} weight="fill"/>@ghiberti85</span>
-                        <span><Buildings size={18} weight="fill"/>Ghiberti Company</span>
-                        <span><Users size={18} weight="fill"/>85 followers</span>
-                    </InfoContainer>
-                </BioContainer>
-            </header>
+    const { register, handleSubmit } = useForm()
 
-            <SearchForm>
-                <div>
-                    <span>Publicações</span>
-                    <span>19 publicações</span>
-                </div>
+    const { userData, issuesData, fetchSearch } = useContext<any>(PostsContext)
 
-                <input
-                    type="type"
-                    placeholder="Buscar Conteúdo"
-                />
-            </SearchForm>
+    const postList = issuesData.items as PostProps[]
 
-            <PostsContainer>
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-            </PostsContainer>
-        </HomeContainer>
-    )
+    function fetchWithSearch(data: searchProps) {
+        fetchSearch(data)
+    }
+
+    { if(postList) 
+        {
+            return (
+                <HomeContainer>
+                    <header>
+                        <img src={userData.avatar_url} alt="Profile Picture" />
+                        <BioContainer>
+                            <h1>{userData.name}</h1>
+                            <p>{userData.bio}</p>
+                            <a href={userData.html_url} target="_blank" rel="noreferrer noopener">
+                                <LinkSimple size={16} />
+                                GITHUB
+                            </a>
+        
+                            <InfoContainer>
+                                <span><GithubLogo size={18} weight="fill"/>{userData.login}</span>
+                                <span><Buildings size={18} weight="fill"/>{userData.location}</span>
+                                <span><Users size={18} weight="fill"/>{userData.followers + ' followers'}</span>
+                            </InfoContainer>
+                        </BioContainer>
+                    </header>
+        
+                    <SearchForm onSubmit={handleSubmit(fetchWithSearch as any)}>
+                        <div>
+                            <span>Publicações</span>
+                            <span>{issuesData.total_count + ' posts'}</span>
+                        </div>
+        
+                        <input
+                            type="text"
+                            placeholder="Buscar Conteúdo"
+                            {...register('searchValue')}
+                        />
+                    </SearchForm>
+        
+                    <PostsContainer>
+                        {postList.map(post => {
+                            return (
+                                <Post 
+                                    key={post.id}
+                                    postContent={post}
+                                />
+                            )
+                        })}
+                    </PostsContainer>
+                </HomeContainer>
+            )
+        } else {
+            return (
+                <LoadingContent>...Loading</LoadingContent>
+            )
+        }
+    }
 }

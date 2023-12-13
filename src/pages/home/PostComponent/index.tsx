@@ -1,11 +1,37 @@
+import { formatDistanceToNow } from "date-fns";
 import { PostContainer } from "./styles";
+import { useNavigate } from "react-router-dom";
+import { ptBR } from "date-fns/locale";
 
-export function Post() {
+interface PostProps {
+    postContent: {
+        title: string,
+        body: string,
+        number: string,
+        created_at: string
+    }
+}
+
+export function Post({ postContent }: PostProps) {
+
+    const { title, body, number, created_at } = postContent
+
+    const formatedDate = formatDistanceToNow(new Date(created_at), {
+        locale: ptBR,
+        addSuffix: true
+    })
+
+    const navigate = useNavigate()
+
+    function handleGoTopost() {
+        navigate(`/${number}`)
+    }
+
     return (
-        <PostContainer>
-            <span>Há 1 dia</span>
-            <h1>Javascript data types and data structure</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam dolorem, aspernatur non accusamus adipisci magnam libero possimus voluptates quas exercitationem velit cumque natus maiores quam laudantium beatae! Aperiam, perferendis illo.</p>
+        <PostContainer onClick={handleGoTopost}>
+            <span>{formatedDate}</span>
+            <h1>{title}</h1>
+            <p>{body}</p>
         </PostContainer>
     )
 }
