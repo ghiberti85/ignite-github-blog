@@ -23,12 +23,12 @@ export function Post({ postContent }: PostProps) {
 
     const navigate = useNavigate()
 
-    function handleGoTopost() {
+    function handleGoToPost() {
         navigate(`/${number}`)
     }
 
     return (
-        <PostContainer onClick={handleGoTopost}>
+        <PostContainer onClick={handleGoToPost}>
             <span>{formatedDate}</span>
             <h1>{title}</h1>
             <p>{body}</p>
