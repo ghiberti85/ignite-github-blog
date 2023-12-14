@@ -1,16 +1,17 @@
-import { Routes } from "react-router-dom";
-import { Route } from 'react-router';
-import { DefaultLayout } from "./layouts";
-import { Home } from "./pages/home";
-import { PostViewer } from "./pages/PostViewer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from './layouts/'
+import { Home } from './pages/Home'
+import { Post } from "./pages/Post";
 
 export function Router() {
     return (
-        <Routes>
-            <Route path="/" element={<DefaultLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/:postNumber" element={<PostViewer />} />
-            </Route>
-        </Routes>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="posts/:id" element={<Post />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     )
 }
