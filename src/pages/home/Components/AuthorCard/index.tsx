@@ -2,6 +2,7 @@ import axios from "axios"
 import { Buildings, GithubLogo, User } from "phosphor-react"
 import { useEffect, useState } from "react"
 import { AuthorCardContainer, AuthorCardHeader, AuthorCardInfo, InfoGroup } from "./styles"
+import { GitHubLink } from "../../../../components/GitHubLink"
 
 
 interface Author {
