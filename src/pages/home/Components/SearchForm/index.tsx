@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form"
 import { FormHeader, SearchFormContainer } from "./styles"
+import { SearchFormInput } from "../.."
 
 
 interface SearchFormProps {
