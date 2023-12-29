@@ -19,7 +19,7 @@ export function AuthorCard() {
     const [ author, setAuthor ] = useState( {} as Author )
 
     async function fetchProfile() {
-        const response = await axios.get('https://api.github.com.com/users/ghiberti85')
+        const response = await axios.get('https://api.github.com/users/ghiberti85')
 
         setAuthor(response.data)
     }
