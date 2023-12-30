@@ -70,7 +70,7 @@ export function Home () {
                             id: post.number,
                             title: post.title,
                             body: post.body,
-                            createdAt: post.createdAt,
+                            createdAt: post.created_at,
                         }
                     },
                 )
